@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html ng-app="invoice" class="with-statusbar-overlay">
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no, minimal-ui">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black">
+
+<link rel="stylesheet" href="css/ionicons/css/ionicons.min.css">
+<link rel="stylesheet" href="css/framework7.ios.min.css">
+<link rel="stylesheet" href="css/framework7.ios.colors.min.css">
+
+<title>InvoiceClient</title>
+</head>
+<body>
+<div class="statusbar-overlay"></div>
+<div class="panel-overlay"></div>
+	<div class="views">
+		<div class="view view-main">
+			<div class="pages">
+				<div data-page="home" class="page navbar-fixed">
+					<div class="navbar">
+						<div class="navbar-inner">
+							<div class="left"></div>
+							<div class="center">Registration</div>
+							<div class="right"></div>
+						</div>
+					</div>
+					<div class="page-content">
+					<form action="/register" method="post" enctype="application/x-www-form-urlencoded" id="form-register" accept-charset="UTF-8">
+						<div class="list-block">
+							<ul>
+								<li>
+									<div class="item-content">
+										<div class="item-media">
+											<i class="ion-ios-email-outline"></i>
+										</div>
+										<div class="item-inner">
+											<div class="item-title label">Email</div>
+											<div class="item-input">
+												<input type="email" name="email" placeholder="E-mail">
+											</div>
+										</div>
+									</div>
+								</li>
+								<li>
+									<div class="item-content">
+										<div class="item-media">
+											<i class="ion-ios-locked-outline"></i>
+										</div>
+										<div class="item-inner">
+											<div class="item-title label">Password</div>
+											<div class="item-input">
+												<input type="password" name="password" placeholder="Password">
+											</div>
+										</div>
+									</div>
+								</li>
+								<li>
+									<a href="#" data-open-in="popup" class="item-link smart-select">
+										<select name="countries">
+											<option value="1" selected>Canada</option>
+											<option value="2">USA</option>
+											<option value="3">Australia</option>
+										</select>
+										<div class="item-content">
+											<div class="item-media">
+												<i class="ion-ios-location-outline"></i>
+											</div>
+											<div class="item-inner">
+												<div class="item-title label">Country</div>
+											</div>
+										</div>
+									</a>
+								</li>
+								<li>
+									<a href="#" data-open-in="popup"
+										class="item-link smart-select">
+										<select name="industry">
+											<option value="1">Electrical</option>
+											<option value="2">Contracting</option>
+											<option value="3">Plumbing</option>
+											<option value="4">Mechanical</option>
+										</select>
+										<div class="item-content">
+											<div class="item-media">
+												<i class="ion-ios-home-outline"></i>
+											</div>
+											<div class="item-inner">
+												<div class="item-title label">Industry</div>
+											</div>
+										</div>
+									</a>
+								</li>
+							</ul>
+						</div>
+						</form>
+						<div class="list-block">
+							<ul>
+								<li><a href="#" class="button form-from-data">Register</a></li>
+							</ul>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<script src="js/jquery.min.js"></script>
+	<script type="text/javascript" src="js/framework7.min.js"></script>
+	<script type="text/javascript" src="js/service/invoiceScript.js"></script>
+</body>
+</html>

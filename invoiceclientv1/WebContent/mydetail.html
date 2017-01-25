@@ -1,0 +1,170 @@
+
+	
+	
+
+<!DOCTYPE html>
+<html ng-app="invoice" class="with-statusbar-overlay">
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no, minimal-ui">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black">
+
+<link rel="stylesheet" href="css/ionicons/css/ionicons.min.css">
+<link rel="stylesheet" href="css/framework7.ios.min.css">
+<link rel="stylesheet" href="css/framework7.ios.colors.min.css">
+
+<title>InvoiceClient</title>
+
+<script src="js/jquery.min.js"></script>
+	<script type="text/javascript" src="js/framework7.min.js"></script>
+	<script type="text/javascript" src="js/service/invoiceScript.js"></script>
+<script>
+$(document).ready(function(){
+$('.form-update').on('click',function(e) {
+	e.preventDefault();
+	myApp.showPreloader();
+
+	//var form_url = $(this).attr('action');
+	var form_data = myApp.formToData('#form-mydetail');
+	console.log("form_data ==> " , form_data);
+	
+			//firstName = form_data.fname;
+			//lastName =  form_date.lname;
+			 var access_token = localStorage['access_token'];
+		        console.log('access token post detail '  + access_token);
+
+		        $.ajax
+				({
+				  
+				  headers: {
+					    "Authorization": "Bearer " + access_token,
+					    'Accept': 'application/json',
+						'Content-Type': 'application/json' 
+					  },
+					  'url' : baseUrl + '/user/mydetails',
+						'type' : 'POST',
+						'dataType' : 'json',
+						'data' : JSON.stringify(form_data),
+				  async: false,					  
+				  success: function (responsed){
+					  console.log(responsed);
+					  var obj = jQuery.parseJSON( JSON.stringify(responsed ));
+					  if (obj.error) { //some thing wrong..
+		                 console.log(obj.error);
+					  }
+
+					  if (responsed.result == "Success") {
+		                     //success.. lands on the edit page..and pre populate the following data if exits..
+							//myApp.alert('Updated.',APP_TITLE);
+			                alert('Updated Successfully.');
+					  }
+					  
+				  }
+				});			
+});
+
+});
+
+
+     $(document).ready(function(){
+        //call the server and get the my details..
+
+        var access_token = localStorage['access_token'];
+        console.log('access token on my detail page232. '  + access_token);
+        $.ajax
+		({
+		  type: "GET",
+		  url: baseUrl + "/user/mydetails",
+		  dataType: 'json',
+		  headers: {
+			    "Authorization": "Bearer " + access_token
+			  },
+		  async: false,
+		  
+		  data: {},
+		  success: function (responsed){
+			  console.log(responsed);
+			  var obj = jQuery.parseJSON( JSON.stringify(responsed ));
+			  if (obj.error) { //some thing wrong..
+                 console.log(obj.error);
+			  }
+
+			  if (obj.result == "Success") {
+                     //success.. lands on the edit page..and pre populate the following data if exits..
+                  var fname = obj.resultData.fname;
+                  var lname = obj.resultData.lname;
+                  $('#fname').val(fname);
+                  $('#lname').val(lname);
+                  console.log(fname);
+                  console.log(lname);
+			  }
+			  
+		  }
+		});		
+});
+</script>
+
+</head>
+<body>
+<div class="statusbar-overlay"></div>
+<div class="panel-overlay"></div>
+	<div class="views">
+		<div class="view view-main">
+			<div class="pages">
+				<div data-page="home" class="page navbar-fixed">
+					<div class="navbar">
+						<div class="navbar-inner">
+							<div class="left"></div>
+							<div class="center">My Detail</div>
+							<div class="right"></div>
+						</div>
+					</div>
+					<div class="page-content">
+					<form action="/editmydetail" method="post" id="form-mydetail" >
+						<div class="list-block">
+							<ul>
+								<li>
+									<div class="item-content">
+										<div class="item-media">
+											<i class="ion-ios-email-outline"></i>
+										</div>
+										<div class="item-inner">
+											<div class="item-title label">First Name</div>
+											<div class="item-input">
+												<input id="fname" name="fname">
+											</div>
+										</div>
+									</div>
+								</li>
+								<li>
+									<div class="item-content">
+										<div class="item-media">
+											<i class="ion-ios-locked-outline"></i>
+										</div>
+										<div class="item-inner">
+											<div class="item-title label">Last Name</div>
+											<div class="item-input">
+												<input id="lname" name="lname" >
+											</div>
+										</div>
+									</div>
+								</li>
+								
+							</ul>
+						</div>
+						</form>
+						<div class="list-block">
+							<ul>
+								<li><a href="#" class="button form-update">Update</a></li>
+							</ul>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	
+</body>
+</html>
+
+
